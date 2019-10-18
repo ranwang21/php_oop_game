@@ -1,3 +1,12 @@
+<?php
+
+// check win / lose / start status
+if(isset($_GET['status'])){
+    $status = $_GET['status'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -12,6 +21,15 @@
 	<body>
 		<div class="main-container">
 			<h2 class="header">Phrase Hunter</h2>
+            <h3><?php
+                    if(isset($status)){
+                        if($status == "win"){
+                            echo "Congratulations, you won!";
+                        }else if($status == "lose"){
+                            echo "Sorry, you lost!";
+                        }
+                    }
+                ?></h3>
             <form action="play.php" method="GET">
                 <input id="btn__reset" type="submit" value="Start Game" />
             </form>

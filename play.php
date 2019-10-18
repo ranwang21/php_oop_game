@@ -1,3 +1,10 @@
+<?php
+require './inc/Game.php';
+require './inc/Phrase.php';
+
+$game = new Game(new Phrase());
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +20,9 @@
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
+        <form action="play.php" method="get">
+            <?php  echo $game->displayKeyboard(); ?>
+        </form>
     </div>
 </div>
 

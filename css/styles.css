@@ -66,6 +66,10 @@ input[type=submit].correct {
   background-color: var(--color-win);
 }
 
+.correct{
+  background: red;
+}
+
 #btn__reset {
 	width: 200px;
 	margin: 0 auto;
