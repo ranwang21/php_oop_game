@@ -22,12 +22,12 @@ class Phrase
         if(!empty($phrase) && empty($selected)){
             $this->currentPhrase = $phrase;
         } else if(empty($phrase) && !empty($selected)){
-            $randkey = array_rand($this->phrases);
-            $this->currentPhrase = $this->phrases[$randkey];
+            $randKey = array_rand($this->phrases);
+            $this->currentPhrase = $this->phrases[$randKey];
             $this->selected = $selected;
         } else if(empty($phrase) && empty($selected)){
-            $randkey = array_rand($this->phrases);
-            $this->currentPhrase = $this->phrases[$randkey];
+            $randKey = array_rand($this->phrases);
+            $this->currentPhrase = $this->phrases[$randKey];
         } else if(!empty($phrase) && !empty($selected)){
             $this->currentPhrase = $phrase;
             $this->selected = $selected;
@@ -82,8 +82,6 @@ class Phrase
      */
     public function checkLetter($letter): bool
     {
-        // push the selected letter into selected array
-        $this->selected[] = $letter;
         // check match
         foreach (array_map('strtolower', str_split($this->currentPhrase)) as $character){
             if(strtolower($letter) == $character){

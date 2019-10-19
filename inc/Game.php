@@ -2,16 +2,34 @@
 
 class Game{
     private $phrase;
-    private $lives = 3;
+    private $lives = 5;
 
     /**
      * --tested
      * Game constructor
-     * @param $phrase -> an object of class Phrase
+     * @param Phrase $phrase -> an object of class Phrase
+     * @param int $lives -> number of lives
      */
-    public function __construct(Phrase $phrase)
+    public function __construct(Phrase $phrase, int $lives = 5)
     {
         $this->phrase = $phrase;
+        $this->lives = $lives;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLives(): int
+    {
+        return $this->lives;
+    }
+
+    /**
+     * decrease one live when the letter guessed is wrong
+     */
+    public function decreaseLive():void
+    {
+        $this->lives--;
     }
 
     /**

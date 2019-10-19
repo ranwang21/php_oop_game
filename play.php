@@ -8,28 +8,29 @@ require './inc/Phrase.php';
 if(!isset($_SESSION['phrase'])){
     $phrase = new Phrase();
     $game = new Game($phrase);
-    $_SESSION['phrase'] = $phrase->getCurrentPhrase();
-    $_SESSION['selected'] = $phrase->getSelected();
-} else {
-    // if a key is pressed
-    if(isset($_GET['key'])){
+    $_SESSION['phrase'] = $game->getPhrase()->getCurrentPhrase();
+    $_SESSION['selected'] = $game->getPhrase()->getSelected();
+    $_SESSION['lives'] = $game->getLives();
+} else if(isset($_GET['key'])){
         // get the key pressed from the get request parameter
         $keyPressed = trim(filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING));
         $selected = $_SESSION['selected'];
-        // push the key to the session as selected
+        // push the key to the session as selected if the guess is correct
         array_push($selected, $keyPressed);
+        // update selected session
+        $_SESSION['selected'] = $selected;
+        // construct new phrase with the updated array
         $phrase = new Phrase($_SESSION['phrase'], $selected);
-        // update the session
-        $_SESSION['selected'] = $phrase->getSelected();
-        // start game
-        $game = new Game($phrase);
-    } else{
-        $phrase = new Phrase($_SESSION['phrase']);
-        $game = new Game($phrase);
-    }
-
+        // check if selected key match phrase
+        if($phrase->checkLetter($_GET['key'])){
+            $game = new Game($phrase, $_SESSION['lives']);
+        } else{
+            $game = new Game($phrase, $_SESSION['lives']);
+            // decrease lives then update session
+            $game->decreaseLive();
+            $_SESSION['lives'] = $game->getLives();
+        }
 }
-
 ?>
 
 <!DOCTYPE html>
