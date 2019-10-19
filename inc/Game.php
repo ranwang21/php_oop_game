@@ -70,7 +70,7 @@ class Game{
 
     /**
      * -- Tested
-     * @return string -> html for keyboard according to the keys' state (correct, incorrect, unselected)
+     * @return string -> html for keyboard
      */
     public function displayKeyboard()
     {
@@ -89,7 +89,7 @@ class Game{
     }
 
     /**
-     * return html of a row of the keyboard
+     * return html of a row of the keyboard with different class name according to its state (unselected, selected-correct, selected-incorrect)
      * @param array $row
      * @return string -> a row of the keyboard
      */
