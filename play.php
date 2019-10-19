@@ -4,16 +4,31 @@ session_start();
 require './inc/Game.php';
 require './inc/Phrase.php';
 // if no phrase in the session, create a new phrase object with a random currentPhrase property
+// if no phrase in the session, create a new phrase object with a random currentPhrase property
 if(!isset($_SESSION['phrase'])){
     $phrase = new Phrase();
+    $game = new Game($phrase);
     $_SESSION['phrase'] = $phrase->getCurrentPhrase();
     $_SESSION['selected'] = $phrase->getSelected();
 } else {
-    $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+    // if a key is pressed
+    if(isset($_GET['key'])){
+        // get the key pressed from the get request parameter
+        $keyPressed = trim(filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING));
+        $selected = $_SESSION['selected'];
+        // push the key to the session as selected
+        array_push($selected, $keyPressed);
+        $phrase = new Phrase($_SESSION['phrase'], $selected);
+        // update the session
+        $_SESSION['selected'] = $phrase->getSelected();
+        // start game
+        $game = new Game($phrase);
+    } else{
+        $phrase = new Phrase($_SESSION['phrase']);
+        $game = new Game($phrase);
+    }
+
 }
-
-$game = new Game($phrase);
-
 
 ?>
 
@@ -33,7 +48,7 @@ $game = new Game($phrase);
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
         <?php echo $game->getPhrase()->addPhraseToDisplay(); ?>
-        <form action="test.php" method="get">
+        <form action="play.php" method="get">
             <?php  echo $game->displayKeyboard(); ?>
         </form>
         <?php echo $game->displayScore();?>

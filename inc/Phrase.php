@@ -5,10 +5,11 @@ class Phrase
 {
     // random phrases
     private $phrases = [
-        "today is a very good day"
+        "today is a very good day",
+        "the cat is sleeping"
     ];
     private $currentPhrase = "";
-    private $selected = ["T", "o", "y", "A", "v", "k", "p", "m"];
+    private $selected = [];
 
     /**
      * --tested
@@ -16,16 +17,20 @@ class Phrase
      * @param string $phrase
      * @param array $selected
      */
-    public function __construct(string $phrase = null, array $selected = null)
+    public function __construct(string $phrase = null, array $selected = [])
     {
-        // if no phrase is passed in parameter, randomly select a phrase
-        if(empty($phrase) && empty($selected)){
-            $randKey = array_rand($this->phrases);
-            $this->currentPhrase = $this->phrases[$randKey];
-        } else if(!empty($phrase) && empty($selected)){
-            $this->selected = $selected;
-        } else if(empty($phrase) && !empty($selected)){
+        if(!empty($phrase) && empty($selected)){
             $this->currentPhrase = $phrase;
+        } else if(empty($phrase) && !empty($selected)){
+            $randkey = array_rand($this->phrases);
+            $this->currentPhrase = $this->phrases[$randkey];
+            $this->selected = $selected;
+        } else if(empty($phrase) && empty($selected)){
+            $randkey = array_rand($this->phrases);
+            $this->currentPhrase = $this->phrases[$randkey];
+        } else if(!empty($phrase) && !empty($selected)){
+            $this->currentPhrase = $phrase;
+            $this->selected = $selected;
         }
     }
 
