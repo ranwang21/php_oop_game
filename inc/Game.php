@@ -74,17 +74,16 @@ class Game{
      */
     public function displayKeyboard()
     {
-        $firstRow = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
-        $secondRow = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
-        $thirdRow = ["z", "x", "c", "v", "b", "n", "m"];
+        $rows = [
+            ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+            ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+            ["z", "x", "c", "v", "b", "n", "m"]
+        ];
         $keyboardHtml = "";
-
         $keyboardHtml = $keyboardHtml . "<div id=\"qwerty\" class=\"section\">";
-
-        $keyboardHtml = $keyboardHtml . $this->constructKeyRow($firstRow);
-        $keyboardHtml = $keyboardHtml . $this->constructKeyRow($secondRow);
-        $keyboardHtml = $keyboardHtml . $this->constructKeyRow($thirdRow);
-
+        for ($i = 0; $i < 3; $i++){
+            $keyboardHtml = $keyboardHtml . $this->constructKeyRow($rows[$i]);
+        }
         $keyboardHtml = $keyboardHtml . "</div>";
         return $keyboardHtml;
     }
