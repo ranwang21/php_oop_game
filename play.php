@@ -43,6 +43,8 @@ if(!isset($_SESSION['phrase'])){
     $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
     $game = new Game($phrase, $_SESSION['lives']);
 }
+
+include './inc/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -68,5 +70,5 @@ if(!isset($_SESSION['phrase'])){
     </div>
 </div>
 
-</body>
-</html>
+<?php include './inc/footer.php'; ?>
+

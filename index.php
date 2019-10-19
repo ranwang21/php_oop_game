@@ -5,18 +5,10 @@ if(isset($_GET['message'])){
     $status = filter_input(INPUT_GET, 'message', FILTER_SANITIZE_STRING);
 }
 
+include './inc/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Phrase Hunter</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/styles.css" rel="stylesheet">
-		<link href="css/animate.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	</head>
+
 
 	<body <?php
         if(isset($status) && $status == "Congratulations, you win!"){
@@ -42,6 +34,4 @@ if(isset($_GET['message'])){
                 ?>" />
             </form>
 		</div>
-
-	</body>
-</html>
+    <?php include './inc/footer.php'; ?>

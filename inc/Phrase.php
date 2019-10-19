@@ -5,7 +5,11 @@ class Phrase
 {
     // random phrases
     private $phrases = [
-        "the cat is sleeping"
+        "my cat is sleeping",
+        "weather is good",
+        "knock knock",
+        "hello world",
+        "PHP is the best language"
     ];
     private $currentPhrase = "";
     private $selected = [];
