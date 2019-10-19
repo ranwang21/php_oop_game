@@ -1,9 +1,8 @@
 <?php
+//start session
+session_start();
 require "./inc/Game.php";
 require "./inc/Phrase.php";
 
-$game = new Game(new Phrase());
+echo $_GET['key'];
 
-// var_dump($game->displayKeyboard());
-
-echo $game->displayScore();
