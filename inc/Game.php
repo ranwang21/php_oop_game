@@ -2,7 +2,7 @@
 
 class Game{
     private $phrase;
-    private $lives = 5;
+    private $lives = 3;
 
     /**
      * --tested
@@ -21,10 +21,6 @@ class Game{
     {
         return $this->phrase;
     }
-
-
-
-
 
     /**
      * --tested
@@ -73,9 +69,8 @@ class Game{
     }
 
     /**
-     * -- Underconstruction
      * -- Tested
-     * @return string -> html for keyboard according to the keys' state (correct, incorrect, selected)
+     * @return string -> html for keyboard according to the keys' state (correct, incorrect, unselected)
      */
     public function displayKeyboard()
     {
@@ -89,6 +84,10 @@ class Game{
         foreach ($firstRow as $letter){
             if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
                 $keyboardHtml = $keyboardHtml . "<button type='submit' class='key correct' disabled>$letter</button>";
+            }else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
+                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key incorrect' disabled>$letter</button>";
+            }else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
+                $keyboardHtml = $keyboardHtml . "<button class=\"key\">$letter</button>";
             }
         }
 
@@ -98,8 +97,11 @@ class Game{
 
         foreach ($secondRow as $letter){
             if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-
                 $keyboardHtml = $keyboardHtml . "<button type='submit' class='key correct' disabled>$letter</button>";
+            } else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
+                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key incorrect' disabled>$letter</button>";
+            }else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
+                $keyboardHtml = $keyboardHtml . "<button class=\"key\">$letter</button>";
             }
         }
 
@@ -110,15 +112,31 @@ class Game{
         foreach ($thirdRow as $letter){
             if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
                 $keyboardHtml = $keyboardHtml . "<button type='submit' class='key correct' disabled>$letter</button>";
+            }else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
+                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key incorrect' disabled>$letter</button>";
+            } else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
+                $keyboardHtml = $keyboardHtml . "<button class=\"key\">$letter</button>";
             }
         }
 
         $keyboardHtml = $keyboardHtml . "</div></div>";
-
         return $keyboardHtml;
-
     }
 
+    /**
+     * -- TESTED
+     * display score (hearts)
+     * @return string -> html to display live and lost hearts
+     */
     public function displayScore()
-    {}
+    {
+        $scoreBoardHtml = "<div id=\"scoreboard\" class=\"section\"><ol>";
+        for($i = 0; $i < $this->lives; $i ++){
+            $scoreBoardHtml = $scoreBoardHtml . "<li class=\"tries\"><img src='../images/liveHeart.png' height='35px' widght='30px' alt='live-heart-icon'></li>";
+        }
+        for($i = 0; $i < (5 - $this->lives); $i++){
+            $scoreBoardHtml = $scoreBoardHtml . "<li class=\"tries\"><img src='../images/lostHeart.png' height='35px' widght='30px' alt='lost-heart-icon'></li>";
+        }
+        return $scoreBoardHtml;
+    }
 }

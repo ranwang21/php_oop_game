@@ -23,6 +23,7 @@ $game = new Game(new Phrase());
         <form action="play.php" method="get">
             <?php  echo $game->displayKeyboard(); ?>
         </form>
+        <?php echo $game->displayScore();?>
     </div>
 </div>
 

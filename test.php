@@ -6,4 +6,4 @@ $game = new Game(new Phrase());
 
 // var_dump($game->displayKeyboard());
 
-var_dump($game->displayKeyboard());
+echo $game->displayScore();

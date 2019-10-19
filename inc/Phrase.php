@@ -8,7 +8,7 @@ class Phrase
         "today is a very good day"
     ];
     private $currentPhrase = "";
-    private $selected = ["T", "o", "y", "A", "v"];
+    private $selected = ["T", "o", "y", "A", "v", "k", "p", "m"];
 
     /**
      * --tested
