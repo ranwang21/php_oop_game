@@ -59,8 +59,10 @@ class Phrase
         foreach (str_split($this->currentPhrase) as $letter){
             if($letter == " "){
                 $phraseHtml = $phraseHtml . "<li class='hide space'>" . $letter . "</li>";
-            } else {
+            } else if(!in_array($letter, $this->selected)){
                 $phraseHtml = $phraseHtml . "<li class='hide letter " . $letter . "'>" . $letter . "</li>";
+            } else {
+                $phraseHtml = $phraseHtml . "<li class='show letter " . $letter . "'>" . $letter . "</li>";
             }
         }
         $phraseHtml = $phraseHtml . "</ul></div>";

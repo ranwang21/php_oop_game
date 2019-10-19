@@ -20,6 +20,7 @@ $game = new Game(new Phrase());
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
+        <?php echo $game->getPhrase()->addPhraseToDisplay(); ?>
         <form action="play.php" method="get">
             <?php  echo $game->displayKeyboard(); ?>
         </form>
