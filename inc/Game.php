@@ -98,11 +98,11 @@ class Game{
         $html = "<div class='keyrow'>";
         foreach ($row as $letter){
             if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $html = $html . "<button type='submit' class='key correct' disabled>$letter</button>";
+                $html = $html . "<button type='submit' name='key' value='" . $letter . "' class='key correct' disabled>$letter</button>";
             }else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $html = $html . "<button type='submit' class='key incorrect' disabled>$letter</button>";
+                $html = $html . "<button type='submit' name='key' value='" . $letter . "' class='key incorrect' disabled>$letter</button>";
             }else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
-                $html = $html . "<button class=\"key\">$letter</button>";
+                $html = $html . "<button type='submit' name='key' value='" . $letter . "' class=\"key\">$letter</button>";
             }
         }
         $html = $html . "</div>";
