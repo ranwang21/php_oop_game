@@ -5,7 +5,6 @@ class Phrase
 {
     // random phrases
     private $phrases = [
-        "today is a very good day",
         "the cat is sleeping"
     ];
     private $currentPhrase = "";

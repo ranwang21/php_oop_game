@@ -46,6 +46,7 @@ h1 {
   font-size: 30px;
 }
 
+
 button, input[type=submit] {
   margin: 6px;
   border: 1px solid transparent;
@@ -95,6 +96,9 @@ input[type=submit].correct {
   color: #3a3f58;
 }
 
+.index-header{
+  color: white;
+}
 
 /* Phrase */
 

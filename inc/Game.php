@@ -82,7 +82,12 @@ class Game{
         if(!$this->checkForLose() && !$this->checkForWin()){
             return false;
         } else {
-            return true;
+            if($this->checkForLose() && !$this->checkForWin()){
+                return "Sorry, you lose!";
+            }
+            if($this->checkForWin() && !$this->checkForLose()){
+                return "Congratulations, you win!";
+            }
         }
     }
 

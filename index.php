@@ -1,8 +1,8 @@
 <?php
 
 // check win / lose / start status
-if(isset($_GET['status'])){
-    $status = $_GET['status'];
+if(isset($_GET['message'])){
+    $status = filter_input(INPUT_GET, 'message', FILTER_SANITIZE_STRING);
 }
 
 ?>
@@ -18,20 +18,28 @@ if(isset($_GET['status'])){
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	</head>
 
-	<body>
+	<body <?php
+        if(isset($status) && $status == "Congratulations, you win!"){
+            echo "style='background:green'";
+        } else if(isset($status) && $status == "Sorry, you lose!"){
+            echo "style='background:red'";
+        }
+    ?>>
 		<div class="main-container">
-			<h2 class="header">Phrase Hunter</h2>
-            <h3><?php
+			<h2 class="header index-header">Phrase Hunter</h2>
+            <h3 class="index-header"><?php
                     if(isset($status)){
-                        if($status == "win"){
-                            echo "Congratulations, you won!";
-                        }else if($status == "lose"){
-                            echo "Sorry, you lost!";
-                        }
+                        echo $status;
                     }
                 ?></h3>
             <form action="play.php" method="GET">
-                <input id="btn__reset" type="submit" value="Start Game" />
+                <input id="btn__reset" type="submit" value="<?php
+                    if(isset($status)){
+                        echo "Restart";
+                    }else {
+                        echo "Start";
+                    }
+                ?>" />
             </form>
 		</div>
 

@@ -24,12 +24,24 @@ if(!isset($_SESSION['phrase'])){
         // check if selected key match phrase
         if($phrase->checkLetter($_GET['key'])){
             $game = new Game($phrase, $_SESSION['lives']);
-        } else{
+            if($game->gameOver() == "Congratulations, you win!"){
+                session_destroy();
+                header("location:index.php?message=" . $game->gameOver());
+            }
+        } else {
             $game = new Game($phrase, $_SESSION['lives']);
             // decrease lives then update session
             $game->decreaseLive();
             $_SESSION['lives'] = $game->getLives();
+            if($game->gameOver() == "Sorry, you lose!"){
+                session_destroy();
+                header("location:index.php?message=" . $game->gameOver());
+            }
         }
+  // when user visit the url without giving a key parameter
+} else {
+    $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+    $game = new Game($phrase, $_SESSION['lives']);
 }
 ?>
 
