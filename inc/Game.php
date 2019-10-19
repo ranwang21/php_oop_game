@@ -79,48 +79,35 @@ class Game{
         $thirdRow = ["z", "x", "c", "v", "b", "n", "m"];
         $keyboardHtml = "";
 
-        $keyboardHtml = $keyboardHtml . "<div id=\"qwerty\" class=\"section\"><div class='keyrow'>";
+        $keyboardHtml = $keyboardHtml . "<div id=\"qwerty\" class=\"section\">";
 
-        foreach ($firstRow as $letter){
-            if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key correct' disabled>$letter</button>";
-            }else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key incorrect' disabled>$letter</button>";
-            }else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
-                $keyboardHtml = $keyboardHtml . "<button class=\"key\">$letter</button>";
-            }
-        }
+        $keyboardHtml = $keyboardHtml . $this->constructKeyRow($firstRow);
+        $keyboardHtml = $keyboardHtml . $this->constructKeyRow($secondRow);
+        $keyboardHtml = $keyboardHtml . $this->constructKeyRow($thirdRow);
 
         $keyboardHtml = $keyboardHtml . "</div>";
-
-        $keyboardHtml = $keyboardHtml . "<div class=\"keyrow\">";
-
-        foreach ($secondRow as $letter){
-            if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key correct' disabled>$letter</button>";
-            } else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key incorrect' disabled>$letter</button>";
-            }else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
-                $keyboardHtml = $keyboardHtml . "<button class=\"key\">$letter</button>";
-            }
-        }
-
-        $keyboardHtml = $keyboardHtml . "</div>";
-
-        $keyboardHtml = $keyboardHtml . "<div class=\"keyrow\">";
-
-        foreach ($thirdRow as $letter){
-            if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key correct' disabled>$letter</button>";
-            }else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
-                $keyboardHtml = $keyboardHtml . "<button type='submit' class='key incorrect' disabled>$letter</button>";
-            } else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
-                $keyboardHtml = $keyboardHtml . "<button class=\"key\">$letter</button>";
-            }
-        }
-
-        $keyboardHtml = $keyboardHtml . "</div></div>";
         return $keyboardHtml;
+    }
+
+    /**
+     * return html of a row of the keyboard
+     * @param array $row
+     * @return string -> a row of the keyboard
+     */
+    private function constructKeyRow(array $row):string
+    {
+        $html = "<div class='keyrow'>";
+        foreach ($row as $letter){
+            if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
+                $html = $html . "<button type='submit' class='key correct' disabled>$letter</button>";
+            }else if(in_array($letter , array_map('strtolower', $this->phrase->getSelected())) && !in_array($letter, array_map("strtolower", str_split($this->phrase->getCurrentPhrase())))){
+                $html = $html . "<button type='submit' class='key incorrect' disabled>$letter</button>";
+            }else if(!in_array($letter , array_map('strtolower', $this->phrase->getSelected()))){
+                $html = $html . "<button class=\"key\">$letter</button>";
+            }
+        }
+        $html = $html . "</div>";
+        return $html;
     }
 
     /**
